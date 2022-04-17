@@ -1,0 +1,314 @@
+
+edges to delete: [('a', 'b'), ('b', 'e'), ('c', 'b'), ('a', 'd'), ('b', 'f'), ('g', 'b'), ('f', 'e'), ('e', 'g'), ('d', 'f'), ('f', 'd'), ('c', 'f'), ('a', 'c')] 
+
+****************************************
+After 0 deletions:
+Edges still remaining:
+{('d', 'f'), ('f', 'd'), ('g', 'b'), ('a', 'c'), ('a', 'b'), ('b', 'f'), ('b', 'e'), ('e', 'g'), ('c', 'f'), ('c', 'b'), ('f', 'e'), ('a', 'd')}
+Num unreachable nodes: 0 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+b <- a
+c <- a
+d <- a
+Level: 2 --------------------
+e <- b
+f <- b
+Level: 3 --------------------
+g <- e
+Level: 4 --------------------
+Level: 5 --------------------
+Level: 6 --------------------
+Level: infinity --------------------
+
+
+Deleting edge: ('a', 'b')
+****************************************
+After 1 deletions:
+Edges still remaining:
+{('d', 'f'), ('f', 'd'), ('g', 'b'), ('a', 'c'), ('b', 'f'), ('b', 'e'), ('e', 'g'), ('c', 'f'), ('c', 'b'), ('f', 'e'), ('a', 'd')}
+Num unreachable nodes: 0 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+c <- a
+d <- a
+Level: 2 --------------------
+b <- c
+f <- c
+Level: 3 --------------------
+e <- b
+Level: 4 --------------------
+g <- e
+Level: 5 --------------------
+Level: 6 --------------------
+Level: infinity --------------------
+
+
+Deleting edge: ('b', 'e')
+****************************************
+After 2 deletions:
+Edges still remaining:
+{('d', 'f'), ('f', 'd'), ('g', 'b'), ('a', 'c'), ('b', 'f'), ('e', 'g'), ('c', 'f'), ('c', 'b'), ('f', 'e'), ('a', 'd')}
+Num unreachable nodes: 0 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+c <- a
+d <- a
+Level: 2 --------------------
+b <- c
+f <- c
+Level: 3 --------------------
+e <- f
+Level: 4 --------------------
+g <- e
+Level: 5 --------------------
+Level: 6 --------------------
+Level: infinity --------------------
+
+
+Deleting edge: ('c', 'b')
+****************************************
+After 3 deletions:
+Edges still remaining:
+{('d', 'f'), ('f', 'd'), ('g', 'b'), ('a', 'c'), ('b', 'f'), ('e', 'g'), ('c', 'f'), ('f', 'e'), ('a', 'd')}
+Num unreachable nodes: 0 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+c <- a
+d <- a
+Level: 2 --------------------
+f <- c
+Level: 3 --------------------
+e <- f
+Level: 4 --------------------
+g <- e
+Level: 5 --------------------
+b <- g
+Level: 6 --------------------
+Level: infinity --------------------
+
+
+Deleting edge: ('a', 'd')
+****************************************
+After 4 deletions:
+Edges still remaining:
+{('d', 'f'), ('f', 'd'), ('g', 'b'), ('a', 'c'), ('b', 'f'), ('e', 'g'), ('c', 'f'), ('f', 'e')}
+Num unreachable nodes: 0 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+c <- a
+Level: 2 --------------------
+f <- c
+Level: 3 --------------------
+d <- f
+e <- f
+Level: 4 --------------------
+g <- e
+Level: 5 --------------------
+b <- g
+Level: 6 --------------------
+Level: infinity --------------------
+
+
+Deleting edge: ('b', 'f')
+****************************************
+After 5 deletions:
+Edges still remaining:
+{('d', 'f'), ('f', 'd'), ('g', 'b'), ('a', 'c'), ('e', 'g'), ('c', 'f'), ('f', 'e')}
+Num unreachable nodes: 0 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+c <- a
+Level: 2 --------------------
+f <- c
+Level: 3 --------------------
+d <- f
+e <- f
+Level: 4 --------------------
+g <- e
+Level: 5 --------------------
+b <- g
+Level: 6 --------------------
+Level: infinity --------------------
+
+
+Deleting edge: ('g', 'b')
+****************************************
+After 6 deletions:
+Edges still remaining:
+{('d', 'f'), ('f', 'd'), ('a', 'c'), ('e', 'g'), ('c', 'f'), ('f', 'e')}
+Num unreachable nodes: 1 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+c <- a
+Level: 2 --------------------
+f <- c
+Level: 3 --------------------
+d <- f
+e <- f
+Level: 4 --------------------
+g <- e
+Level: 5 --------------------
+Level: 6 --------------------
+Level: infinity --------------------
+b
+
+
+Deleting edge: ('f', 'e')
+****************************************
+After 7 deletions:
+Edges still remaining:
+{('d', 'f'), ('f', 'd'), ('a', 'c'), ('e', 'g'), ('c', 'f')}
+Num unreachable nodes: 3 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+c <- a
+Level: 2 --------------------
+f <- c
+Level: 3 --------------------
+d <- f
+Level: 4 --------------------
+Level: 5 --------------------
+Level: 6 --------------------
+Level: infinity --------------------
+b
+e
+g
+
+
+Deleting edge: ('e', 'g')
+****************************************
+After 8 deletions:
+Edges still remaining:
+{('d', 'f'), ('f', 'd'), ('a', 'c'), ('c', 'f')}
+Num unreachable nodes: 3 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+c <- a
+Level: 2 --------------------
+f <- c
+Level: 3 --------------------
+d <- f
+Level: 4 --------------------
+Level: 5 --------------------
+Level: 6 --------------------
+Level: infinity --------------------
+b
+e
+g
+
+
+Deleting edge: ('d', 'f')
+****************************************
+After 9 deletions:
+Edges still remaining:
+{('f', 'd'), ('a', 'c'), ('c', 'f')}
+Num unreachable nodes: 3 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+c <- a
+Level: 2 --------------------
+f <- c
+Level: 3 --------------------
+d <- f
+Level: 4 --------------------
+Level: 5 --------------------
+Level: 6 --------------------
+Level: infinity --------------------
+b
+e
+g
+
+
+Deleting edge: ('f', 'd')
+****************************************
+After 10 deletions:
+Edges still remaining:
+{('a', 'c'), ('c', 'f')}
+Num unreachable nodes: 4 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+c <- a
+Level: 2 --------------------
+f <- c
+Level: 3 --------------------
+Level: 4 --------------------
+Level: 5 --------------------
+Level: 6 --------------------
+Level: infinity --------------------
+b
+d
+e
+g
+
+
+Deleting edge: ('c', 'f')
+****************************************
+After 11 deletions:
+Edges still remaining:
+{('a', 'c')}
+Num unreachable nodes: 5 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+c <- a
+Level: 2 --------------------
+Level: 3 --------------------
+Level: 4 --------------------
+Level: 5 --------------------
+Level: 6 --------------------
+Level: infinity --------------------
+b
+d
+e
+f
+g
+
+
+Deleting edge: ('a', 'c')
+****************************************
+After 12 deletions:
+Edges still remaining:
+set()
+Num unreachable nodes: 6 
+
+Level: 0 --------------------
+a
+Level: 1 --------------------
+Level: 2 --------------------
+Level: 3 --------------------
+Level: 4 --------------------
+Level: 5 --------------------
+Level: 6 --------------------
+Level: infinity --------------------
+b
+c
+d
+e
+f
+g
+
+

@@ -246,46 +246,46 @@ if __name__ == '__main__':
     input_file = "input"
     if len(sys.argv) == 2:
         input_file = sys.argv[1]
+        # print(input_file)
     elif len(sys.argv) > 2:
         print("ERROR: Too many arguments")
-    else:
 
-        nodes = set()
-        edges = set()
-        root = ""
-        edges_to_delete = []
-        with open(input_file) as f:
-            lines = f.readlines()
-            nodes_list = lines[0].split()
-            # assume first node in list is the root
-            root = nodes_list[0]
-            for node in nodes_list:
-                nodes.add(node)
-            edges_list = lines[1].split()
-            for edge in edges_list:
-                edge = edge.split(",")
-                if len(edge) != 2 or edge[0] not in nodes or edge[1] not in nodes:
-                    print("ERROR: Edges provided are not good")
-                edges.add((edge[0], edge[1]))
-            edges_to_delete_list = lines[2].split()
-            if len(edges_to_delete_list) != len(edges):
-                print("ERROR: Not enough or too many edges to delete")
-            for edge in edges_to_delete_list:
-                edge = edge.split(",")
-                if len(edge) != 2 or edge[0] not in nodes or edge[1] not in nodes or (edge[0], edge[1]) not in edges:
-                    print("ERROR: Edges provided for deletion are not good")
-                edges_to_delete.append((edge[0], edge[1]))
+    nodes = set()
+    edges = set()
+    root = ""
+    edges_to_delete = []
+    with open(input_file) as f:
+        lines = f.readlines()
+        nodes_list = lines[0].split()
+        # assume first node in list is the root
+        root = nodes_list[0]
+        for node in nodes_list:
+            nodes.add(node)
+        edges_list = lines[1].split()
+        for edge in edges_list:
+            edge = edge.split(",")
+            if len(edge) != 2 or edge[0] not in nodes or edge[1] not in nodes:
+                print("ERROR: Edges provided are not good")
+            edges.add((edge[0], edge[1]))
+        edges_to_delete_list = lines[2].split()
+        if len(edges_to_delete_list) != len(edges):
+            print("ERROR: Not enough or too many edges to delete")
+        for edge in edges_to_delete_list:
+            edge = edge.split(",")
+            if len(edge) != 2 or edge[0] not in nodes or edge[1] not in nodes or (edge[0], edge[1]) not in edges:
+                print("ERROR: Edges provided for deletion are not good")
+            edges_to_delete.append((edge[0], edge[1]))
 
-        estree = ESTree(nodes, edges, root)
-        # estree.printAfterInit()
-        print("\nedges to delete:", edges_to_delete, "\n")
-        estree.printTree(0)
-        for i, edge_to_delete in enumerate(edges_to_delete):
-            estree.deleteEdge(edge_to_delete)
-            print("Deleting edge:", edge_to_delete)
-            # print(edge_to_delete[1])
-            estree.updateLevel(edge_to_delete[1])
-            estree.printTree(i + 1)
+    estree = ESTree(nodes, edges, root)
+    # estree.printAfterInit()
+    print("\nedges to delete:", edges_to_delete, "\n")
+    estree.printTree(0)
+    for i, edge_to_delete in enumerate(edges_to_delete):
+        estree.deleteEdge(edge_to_delete)
+        print("Deleting edge:", edge_to_delete)
+        # print(edge_to_delete[1])
+        estree.updateLevel(edge_to_delete[1])
+        estree.printTree(i + 1)
 
 
 

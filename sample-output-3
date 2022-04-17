@@ -1,0 +1,110 @@
+
+edges to delete: [('s', 'u'), ('u', 'v'), ('v', 'u'), ('u', 'w'), ('w', 'u')] 
+
+****************************************
+After 0 deletions:
+Edges still remaining:
+{('u', 'v'), ('v', 'u'), ('s', 'u'), ('u', 'w'), ('w', 'u')}
+Num unreachable nodes: 0 
+
+Level: 0 --------------------
+s
+Level: 1 --------------------
+u <- s
+Level: 2 --------------------
+v <- u
+w <- u
+Level: 3 --------------------
+Level: infinity --------------------
+
+
+Deleting edge: ('s', 'u')
+****************************************
+After 1 deletions:
+Edges still remaining:
+{('u', 'v'), ('v', 'u'), ('u', 'w'), ('w', 'u')}
+Num unreachable nodes: 3 
+
+Level: 0 --------------------
+s
+Level: 1 --------------------
+Level: 2 --------------------
+Level: 3 --------------------
+Level: infinity --------------------
+u
+v
+w
+
+
+Deleting edge: ('u', 'v')
+****************************************
+After 2 deletions:
+Edges still remaining:
+{('v', 'u'), ('u', 'w'), ('w', 'u')}
+Num unreachable nodes: 3 
+
+Level: 0 --------------------
+s
+Level: 1 --------------------
+Level: 2 --------------------
+Level: 3 --------------------
+Level: infinity --------------------
+u
+v
+w
+
+
+Deleting edge: ('v', 'u')
+****************************************
+After 3 deletions:
+Edges still remaining:
+{('u', 'w'), ('w', 'u')}
+Num unreachable nodes: 3 
+
+Level: 0 --------------------
+s
+Level: 1 --------------------
+Level: 2 --------------------
+Level: 3 --------------------
+Level: infinity --------------------
+u
+v
+w
+
+
+Deleting edge: ('u', 'w')
+****************************************
+After 4 deletions:
+Edges still remaining:
+{('w', 'u')}
+Num unreachable nodes: 3 
+
+Level: 0 --------------------
+s
+Level: 1 --------------------
+Level: 2 --------------------
+Level: 3 --------------------
+Level: infinity --------------------
+u
+v
+w
+
+
+Deleting edge: ('w', 'u')
+****************************************
+After 5 deletions:
+Edges still remaining:
+set()
+Num unreachable nodes: 3 
+
+Level: 0 --------------------
+s
+Level: 1 --------------------
+Level: 2 --------------------
+Level: 3 --------------------
+Level: infinity --------------------
+u
+v
+w
+
+
