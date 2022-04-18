@@ -1,7 +1,7 @@
 
 # James Wu (wujames)
 
-import sys
+from detectcycles import Graph
 import argparse
 from collections import deque
 
@@ -326,11 +326,33 @@ class ESTree:
                     self.updateLevelReachability(node)
 
 
+def isGraphCyclic(graphnodes, graphedges):
+    nodes = graphnodes.copy()
+    edges = graphedges.copy()
+    nodes_list = list(nodes)
+    node_to_int = {}
+    graph = Graph(len(nodes))
+
+    # convert all nodes (str) into int form, since the Graph code only works with ints
+    for i, node in enumerate(nodes):
+        node_to_int[node] = i
+    # add edges to graph, where nodes are in int form
+    for edge in edges:
+        u = edge[0]
+        v = edge[1]
+        graph.addEdge(node_to_int[u], node_to_int[v])
+    # return whether graph has cycle
+    if graph.isCyclic() == 1:
+        return True
+    else:
+        return False
+
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', type=str, required=False, default="input", help="Name of input file")
-    parser.add_argument('-m', action='store_true', help="Flag to allow for manual edge deletion (otherwise, edges to delete will be read from input file)")
+    parser.add_argument('-m', action='store_true', help="Flag to allow for manual edge deletion")
     parser.add_argument('-r', action='store_true', help="Flag to keep track of reachability instead of levels")
     args = parser.parse_args()
     # print('input file:', args.input)
@@ -372,6 +394,11 @@ if __name__ == '__main__':
 
     estree = ESTree(nodes, edges, root)
     # estree.printAfterInit()
+
+    # check if graph is cyclic
+    if reachability and isGraphCyclic(nodes, edges):
+        print("ERROR: Graph is cyclic, so reachability cannot be determined")
+        exit()
 
     if not manual_deletion:
         print("\nedges to delete:", edges_to_delete, "\n")
