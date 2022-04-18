@@ -2,8 +2,7 @@
 # James Wu (wujames)
 
 import sys
-import os
-import math
+import argparse
 from collections import deque
 
 
@@ -36,8 +35,8 @@ class ESTree:
 
 
     def __init__(self, nodes, edges, root):
-        self.nodes = nodes
-        self.edges = edges
+        self.nodes = nodes.copy()
+        self.edges = edges.copy()
         self.num_nodes = len(nodes)
         self.num_unreachable = 0
         # initialize parents_of and children_of
@@ -122,7 +121,6 @@ class ESTree:
 
 
     def printTree(self, num_deletions):
-        nodes = self.nodes
         edges = self.edges
         level_of = self.level_of
         num_unreachable = self.num_unreachable
@@ -157,6 +155,47 @@ class ESTree:
                 print(node, "<-", A[node])
         # print every node that is now unreachable
         print("Level: infinity --------------------")
+        unreachable_nodes = list(unreachable_nodes)
+        unreachable_nodes.sort()
+        for node in unreachable_nodes:
+            print(node)
+        print("\n")
+
+
+    def printTreeReachability(self, num_deletions):
+        edges = self.edges
+        level_of = self.level_of
+        num_unreachable = self.num_unreachable
+        unreachable_nodes = self.unreachable_nodes
+        A = self.A
+
+        print("****************************************")
+        print("After", str(num_deletions), "deletions:")
+        print("Edges still remaining:")
+        print(edges)
+        print("Num unreachable nodes:", num_unreachable, "\n")
+
+        nodes_on_this_level = {}
+        for i in range(self.num_nodes):
+            nodes_on_this_level[i] = set()
+        for node in level_of:
+            lvl = level_of[node]
+            if lvl != "infinity":
+                nodes_on_this_level[lvl].add(node)
+
+        # trivially print the root node
+        print("Reachable nodes --------------------")
+        for node in nodes_on_this_level[0]:
+            print(node)
+        # print every node on each following level, along with its current parent (format: "node <- parent")
+        for i in range(1, self.num_nodes):
+            lvl_nodes = nodes_on_this_level[i]
+            lvl_nodes = list(lvl_nodes)
+            lvl_nodes.sort()
+            for node in lvl_nodes:
+                print(node, "<-", A[node])
+        # print every node that is now unreachable
+        print("Unreachable nodes --------------------")
         unreachable_nodes = list(unreachable_nodes)
         unreachable_nodes.sort()
         for node in unreachable_nodes:
@@ -241,14 +280,64 @@ class ESTree:
                 self.updateLevel(u)
 
 
+    # (Let i denote the level of u to be updated)
+    # UpdateLevel(u):
+    #   If u's current parent (node in set A) has become unreachable, place it in set B, and now, u must find a new parent that is reachable:
+    #       For node in set C:
+    #           If node is unreachable, place that node in set B. That node is "discarded".
+    #           Else that node becomes the new parent, so place it in set A. Return from function.
+    #       Once all nodes in C have been exhausted, that means there is no reachable node with an incoming edge to u. Thus, u is now unreachable.
+    #       Call UpdateLevel(v) for all nodes v with outgoing edges from u.
+    #   Else do nothing (node u gets to keep its parent).
+    def updateLevelReachability(self, u):
+        i = self.level_of[u]
+        # (do not update level of nodes that are unreachable or the root node)
+        if i == "infinity" or i == 0:
+            return
+
+        # (if a node's level is infinity, it is unreachable; otherwise, it is reachable)
+        # If u's current parent (node in set A) has become unreachable, place it in set B, and now, u must find a new parent that is reachable:
+        if self.A[u] == None or self.level_of[self.A[u]] == "infinity":
+            # (place current parent into set B)
+            if self.A[u] != None:
+                self.B[u].add(self.A[u])
+            # For node in set C:
+            while self.C[u]:
+                # (this node is the potential new current parent for u)
+                node = self.C[u].pop()
+                # If node is unreachable, place that node in set B. That node is "discarded".
+                if self.level_of[node] == "infinity":
+                    self.B[u].add(node)
+                # Else that node becomes the new parent, so place it in set A. Return from function.
+                else:
+                    self.A[u] = node
+                    return
+            
+            # Once all nodes in C have been exhausted, that means there is no reachable node with an incoming edge to u. Thus, u is now unreachable.
+            self.A[u] = None
+            self.B[u] = set()
+            self.C[u] = set()
+            self.level_of[u] = "infinity"
+            self.num_unreachable += 1
+            self.unreachable_nodes.add(u)
+            # Call UpdateLevel(v) for all nodes v with outgoing edges from u.
+            if u in self.children_of:
+                for node in self.children_of[u]:
+                    self.updateLevelReachability(node)
+
+
 if __name__ == '__main__':
 
-    input_file = "input"
-    if len(sys.argv) == 2:
-        input_file = sys.argv[1]
-        # print(input_file)
-    elif len(sys.argv) > 2:
-        print("ERROR: Too many arguments")
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input', type=str, required=False, default="input", help="Name of input file")
+    parser.add_argument('-m', action='store_true', help="Flag to allow for manual edge deletion (otherwise, edges to delete will be read from input file)")
+    parser.add_argument('-r', action='store_true', help="Flag to keep track of reachability instead of levels")
+    args = parser.parse_args()
+    # print('input file:', args.input)
+    # print('manual edge deletion:', args.m)
+    input_file = args.input
+    manual_deletion = args.m
+    reachability = args.r
 
     nodes = set()
     edges = set()
@@ -266,26 +355,73 @@ if __name__ == '__main__':
             edge = edge.split(",")
             if len(edge) != 2 or edge[0] not in nodes or edge[1] not in nodes:
                 print("ERROR: Edges provided are not good")
+                exit()
             edges.add((edge[0], edge[1]))
-        edges_to_delete_list = lines[2].split()
-        if len(edges_to_delete_list) != len(edges):
-            print("ERROR: Not enough or too many edges to delete")
-        for edge in edges_to_delete_list:
-            edge = edge.split(",")
-            if len(edge) != 2 or edge[0] not in nodes or edge[1] not in nodes or (edge[0], edge[1]) not in edges:
-                print("ERROR: Edges provided for deletion are not good")
-            edges_to_delete.append((edge[0], edge[1]))
+
+        if not manual_deletion:
+            edges_to_delete_list = lines[2].split()
+            if len(edges_to_delete_list) != len(edges):
+                print("ERROR: Not enough or too many edges to delete")
+                exit()
+            for edge in edges_to_delete_list:
+                edge = edge.split(",")
+                if len(edge) != 2 or edge[0] not in nodes or edge[1] not in nodes or (edge[0], edge[1]) not in edges:
+                    print("ERROR: Edges provided for deletion are not good")
+                    exit()
+                edges_to_delete.append((edge[0], edge[1]))
 
     estree = ESTree(nodes, edges, root)
     # estree.printAfterInit()
-    print("\nedges to delete:", edges_to_delete, "\n")
-    estree.printTree(0)
-    for i, edge_to_delete in enumerate(edges_to_delete):
-        estree.deleteEdge(edge_to_delete)
-        print("Deleting edge:", edge_to_delete)
-        # print(edge_to_delete[1])
-        estree.updateLevel(edge_to_delete[1])
-        estree.printTree(i + 1)
 
+    if not manual_deletion:
+        print("\nedges to delete:", edges_to_delete, "\n")
+        if reachability:
+            estree.printTreeReachability(0)
+        else:
+            estree.printTree(0)
 
+        for i, edge_to_delete in enumerate(edges_to_delete):
+            estree.deleteEdge(edge_to_delete)
+            print("Deleting edge:", edge_to_delete)
+            # print(edge_to_delete[1])
+            if reachability:
+                estree.updateLevelReachability(edge_to_delete[1])
+                estree.printTreeReachability(i + 1)
+            else:
+                estree.updateLevel(edge_to_delete[1])
+                estree.printTree(i + 1)
 
+    else:
+        if reachability:
+            estree.printTreeReachability(0)
+        else:
+            estree.printTree(0)
+        num_deleted = 0
+        num_edges = len(edges)
+        while num_deleted < num_edges:
+            print("Input the " + str(num_deleted + 1) + "-th edge to delete (or enter \"quit\"):")
+            edge_to_delete = input()
+            if edge_to_delete == "quit":
+                print("Goodbye")
+                break
+
+            edge = edge_to_delete.split(",")
+            if len(edge) != 2 or edge[0] not in nodes or edge[1] not in nodes:
+                print("ERROR: Edge provided is not good; please try again")
+                continue
+            if (edge[0], edge[1]) not in edges:
+                print("ERROR: Edge provided is not in the graph; please try again")
+                continue
+
+            edge_to_delete = (edge[0], edge[1])
+            edges.remove(edge_to_delete)
+            estree.deleteEdge(edge_to_delete)
+            print("Deleting edge:", edge_to_delete)
+            if reachability:
+                estree.updateLevelReachability(edge_to_delete[1])
+                estree.printTreeReachability(num_deleted + 1)
+            else:
+                estree.updateLevel(edge_to_delete[1])
+                estree.printTree(num_deleted + 1)
+
+            num_deleted += 1
