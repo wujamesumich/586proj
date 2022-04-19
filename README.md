@@ -32,4 +32,10 @@ Example: if the user would like to run the program to keep track of node reachab
 
 The format of the input file should consist of three lines. The first line is a list of nodes (strings) delimited with spaces. The first node is assumed to be the root node. The second line is a list of edges delimited with spaces, where each edge follows the format "<source node\>,<target node\>". The third line is a list of edges to be deleted, and the order of the edges is determined by the order in which they were listed. Every edge listed in the second line must be deleted exactly once.
 
-If the user would like to manually input edges to be deleted in the terminal, the program will prompt the user for each edge to be input. Edges provided must be in the format "<source node\>,<target node\>", or else the user will be prompted again for an edge to be deleted.
+If the user would like to manually input edges to be deleted in the terminal, the program will prompt the user for each edge to be input. Edges provided must be in the format "<source node\>,<target node\>", or else the user will be prompted again for an edge to be deleted. Note that if the user selects the option to manually input edges, the third line of the input file would be optional and redundant.
+
+## BFS Algorithm
+
+The bfs.py program was written to provide a baseline to compare the performance of the ES-tree algorithm. Its usage is similar to that of estree.py. Note that the BFS algorithm uses the same BFS functionality no matter if the user selects the levels option or the reachability option.
+
+The BFS algorithm is O(m^2) overall, where m is the number of edges.

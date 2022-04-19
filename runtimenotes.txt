@@ -1,0 +1,94 @@
+
+levels:
+
+input 1:
+    es-tree:
+        real    0m0.185s
+        user    0m0.076s
+        sys     0m0.011s
+        real    0m0.159s
+        user    0m0.063s
+        sys     0m0.018s
+        real    0m0.073s
+        user    0m0.034s
+        sys     0m0.008s
+    bfs:
+        real    0m0.145s
+        user    0m0.070s
+        sys     0m0.012s
+        real    0m0.139s
+        user    0m0.081s
+        sys     0m0.000s
+        real    0m0.122s
+        user    0m0.060s
+        sys     0m0.010s
+
+input 2:
+    es-tree:
+        real    0m0.173s
+        user    0m0.079s
+        sys     0m0.013s
+        real    0m0.156s
+        user    0m0.070s
+        sys     0m0.014s
+        real    0m0.176s
+        user    0m0.085s
+        sys     0m0.036s
+    bfs:
+        real    0m0.086s
+        user    0m0.039s
+        sys     0m0.010s
+        real    0m0.135s
+        user    0m0.096s
+        sys     0m0.000s
+        real    0m0.107s
+        user    0m0.062s
+        sys     0m0.010s
+
+input 3:
+    estree:
+        real    0m0.170s
+        user    0m0.092s
+        sys     0m0.000s
+        real    0m0.155s
+        user    0m0.057s
+        sys     0m0.019s
+        real    0m0.155s
+        user    0m0.084s
+        sys     0m0.000s
+    bfs:
+        real    0m0.144s
+        user    0m0.058s
+        sys     0m0.023s
+        real    0m0.143s
+        user    0m0.062s
+        sys     0m0.021s
+        real    0m0.135s
+        user    0m0.077s
+        sys     0m0.000s
+
+
+reachability:
+
+input 1:
+    es-tree:
+        real    0m0.067s
+        user    0m0.038s
+        sys     0m0.000s
+        real    0m0.165s
+        user    0m0.081s
+        sys     0m0.009s
+        real    0m0.061s
+        user    0m0.025s
+        sys     0m0.012s
+    bfs:
+        real    0m0.075s
+        user    0m0.045s
+        sys     0m0.001s
+        real    0m0.100s
+        user    0m0.042s
+        sys     0m0.015s
+        real    0m0.086s
+        user    0m0.034s
+        sys     0m0.017s
+
