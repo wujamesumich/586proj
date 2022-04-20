@@ -213,15 +213,17 @@ class BFS:
                         level_of[v] = level_of[curr_node] + 1
 
         # initialize level_of for nodes not reached in bfs
+        num_unreachable = 0
         for node in nodes:
             if node not in level_of:
                 level_of[node] = "infinity"
-                self.num_unreachable += 1
+                num_unreachable += 1
                 self.unreachable_nodes.add(node)
 
         self.parents_of = parents_of
         self.children_of = children_of
         self.level_of = level_of
+        self.num_unreachable = num_unreachable
 
 
 if __name__ == '__main__':
