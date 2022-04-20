@@ -94,8 +94,8 @@ class BFS:
 
         print("****************************************")
         print("After", str(num_deletions), "deletions:")
-        print("Edges still remaining:")
-        print(edges)
+        # print("Edges still remaining:")
+        # print(edges)
         print("Num unreachable nodes:", num_unreachable, "\n")
 
         nodes_on_this_level = {}
@@ -135,8 +135,8 @@ class BFS:
 
         print("****************************************")
         print("After", str(num_deletions), "deletions:")
-        print("Edges still remaining:")
-        print(edges)
+        # print("Edges still remaining:")
+        # print(edges)
         print("Num unreachable nodes:", num_unreachable, "\n")
 
         nodes_on_this_level = {}

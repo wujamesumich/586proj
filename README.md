@@ -39,3 +39,11 @@ If the user would like to manually input edges to be deleted in the terminal, th
 The bfs.py program was written to provide a baseline to compare the performance of the ES-tree algorithm. Its usage is similar to that of estree.py. Note that the BFS algorithm uses the same BFS functionality no matter if the user selects the levels option or the reachability option.
 
 The BFS algorithm is O(m^2) overall, where m is the number of edges.
+
+## Auto-Generating a Large, Dense Graph
+
+The makelargegraph.py program auto-generates graphs of large input sizes. For a graph with n nodes, the graph would partition the nodes into groups of <span\> nodes (where <span\> is hardcoded to 5 for now); essentially, the algorithm would create n/5 "rows" of nodes. Then, the nodes would be connected with edges: every node in a row would have a directed edge to all nodes of all "lower" rows. Finally, A node would be added at the top, designated as the root node, and connected to the nodes in the topmost row. The result is a very dense DAG; by design, there are no back-edges, since all edges point "downwards". For edge removal, the order in which edges are removed is determined randomly.
+
+Below is the format for how to run this program in the terminal (where <num nodes\> is the number of non-root nodes in the graph):
+
+> python3 makelargegraph.py <num nodes\>
