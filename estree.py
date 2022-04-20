@@ -129,8 +129,8 @@ class ESTree:
 
         print("****************************************")
         print("After", str(num_deletions), "deletions:")
-        print("Edges still remaining:")
-        print(edges)
+        # print("Edges still remaining:")
+        # print(edges)
         print("Num unreachable nodes:", num_unreachable, "\n")
 
         nodes_on_this_level = {}
@@ -152,7 +152,8 @@ class ESTree:
             lvl_nodes = list(lvl_nodes)
             lvl_nodes.sort()
             for node in lvl_nodes:
-                print(node, "<-", A[node])
+                # print(node, "<-", A[node])
+                print(node)
         # print every node that is now unreachable
         print("Level: infinity --------------------")
         unreachable_nodes = list(unreachable_nodes)
@@ -171,8 +172,8 @@ class ESTree:
 
         print("****************************************")
         print("After", str(num_deletions), "deletions:")
-        print("Edges still remaining:")
-        print(edges)
+        # print("Edges still remaining:")
+        # print(edges)
         print("Num unreachable nodes:", num_unreachable, "\n")
 
         nodes_on_this_level = {}
@@ -193,7 +194,8 @@ class ESTree:
             lvl_nodes = list(lvl_nodes)
             lvl_nodes.sort()
             for node in lvl_nodes:
-                print(node, "<-", A[node])
+                # print(node, "<-", A[node])
+                print(node)
         # print every node that is now unreachable
         print("Unreachable nodes --------------------")
         unreachable_nodes = list(unreachable_nodes)

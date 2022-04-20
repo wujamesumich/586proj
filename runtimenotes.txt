@@ -67,6 +67,51 @@ input 3:
         user    0m0.077s
         sys     0m0.000s
 
+input-100:
+    estree:
+        real    0m1.529s
+        user    0m1.051s
+        sys     0m0.042s
+        real    0m1.874s
+        user    0m1.257s
+        sys     0m0.093s
+        real    0m1.698s
+        user    0m1.239s
+        sys     0m0.030s
+    bfs:
+        real    0m10.538s
+        user    0m9.212s
+        sys     0m0.180s
+        real    0m9.651s
+        user    0m8.744s
+        sys     0m0.112s
+        real    0m8.479s
+        user    0m7.556s
+        sys     0m0.091s
+
+input-200:
+    estree:
+        real    0m11.813s
+        user    0m6.905s
+        sys     0m0.234s
+        real    0m11.165s
+        user    0m6.506s
+        sys     0m0.212s
+        real    0m10.580s
+        user    0m6.628s
+        sys     0m0.202s
+    bfs:
+        real    2m37.396s
+        user    2m25.581s
+        sys     0m0.634s
+        real    3m0.808s
+        user    2m51.081s
+        sys     0m0.482s
+        real    3m13.263s
+        user    3m3.687s
+        sys     0m0.685s
+
+
 
 reachability:
 
@@ -92,3 +137,46 @@ input 1:
         user    0m0.034s
         sys     0m0.017s
 
+input-100:
+    estree:
+        real    0m0.584s
+        user    0m0.418s
+        sys     0m0.000s
+        real    0m0.480s
+        user    0m0.400s
+        sys     0m0.000s
+        real    0m0.617s
+        user    0m0.411s
+        sys     0m0.021s
+    bfs:
+        real    0m5.171s
+        user    0m4.954s
+        sys     0m0.000s
+        real    0m4.809s
+        user    0m4.614s
+        sys     0m0.020s
+        real    0m4.863s
+        user    0m4.647s
+        sys     0m0.020s
+
+input-200:
+    estree:
+        real    0m3.693s
+        user    0m3.018s
+        sys     0m0.010s
+        real    0m3.607s
+        user    0m2.935s
+        sys     0m0.039s
+        real    0m3.777s
+        user    0m3.144s
+        sys     0m0.049s
+    bfs:
+        real    2m29.732s
+        user    2m27.750s
+        sys     0m0.130s
+        real    2m24.266s
+        user    2m23.008s
+        sys     0m0.090s
+        real    2m31.686s
+        user    2m30.509s
+        sys     0m0.080s
